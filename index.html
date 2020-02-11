@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,67 +11,113 @@
 
 
 <body>
-    
+
     <center>
-        
-        <div class="comprobar"></div>
-        <div class="saludo"><h1>Buenos dias:</h1></div>
+
+        <div class="saludo">
+            <h1>Página turboCool</h1>
+        </div>
         <div class="fondito">
-    <div id="inicial">
-    <h2>Logearse</h2><input type="button" value="Log In" class="Login" id="logear">
-    
-    <h2>Registrarse</h2><input type="button" value="Registrarse" class="signin" id="alta">
-<br>
-<br>
-</div>
 
-<p id="p"></p>
-<div id="logearse">
-   
-        
-        <p id="d"></p>
-        
-    <form>
-        <br>
-        <label for="Email">Email o numero: </label><br><input type="text" id="email2" name="email2" required><br><br>
-        <label for="ContLog">Contraseña: </label><br><input type="password" id="ContLog" name="ContLog" required><br><br>
-        <input type="button" name="mostrar" id="mostrar" class="mostrar" value="Mostrar contraseña" onclick="mostrarContra()"><br><br><br>
-        <input type="submit" value="Enviar post resgistro" id="enviar2" onclick="conectarse(); return false">
-        <input type="submit" value="Enviar sin registro" id="enviar3" onclick="conectar(); return false"><br><br><br>
-        <input type="reset" value="Borrar"><br><br><br>
-        
-    </form>
-    <a href="index.html">Volver</a>
-    <br><br>
 
-</div>
-<div id="registrarse"> 
-    
-    <form>
-        <br>
-        <label for="Nombre">Nombre:* </label><br><input type="text" name="Nombre" id="Nombre" required><br><br>
-        <label for="Apellido">Apellido:* </label><br><input type="text" name="Apellido" id="Apellido" required><br><br>
-        <label for="email">Email o numero:*</label><br><input type="text" name="email" id="email" required><br><br>
-        <label for="Contraseña">Contraseña:* </label><br><input type="password"  id="contraseña" required><br><br>
-        <label for="Repetir">Repetir Contraseña:* </label><br><input type="password"  id="repetir" required><br><br>
-        <label for="Nacimiento">Fecha de nacimiento: </label><br><input type="date" name="Nacimiento" id="Nacimiento"><br><br>
-        <input type="button" value="Enviar" name="Enviar" id="enviar1">
-        <input type="reset" value="Borrar" name="Borrar"><br><br><br>
-        <br>
-        <label class="obli">* campos obligatorios</label>
-    </form>
-    <br>
-    <a href="index.html">Volver</a>
-    <br><br>
+            <div id="inicial" class="tab">
 
-</div>
-<div id="final">
-    <h1>Bienvenido a tu pagina, estamos creando cookies</h1>
-    <br>
-    <a href="index.html" id="paradesconectarse">Desconectarse</a>
-    <br><br>
-</div>
-</center>
+                <input type="button" class="Login tablinks" id="logear" onclick="abrirPesta(event, 'logearse')" value="Log In"></input>
+                <input type="button" class="signin tablinks" id="alta" onclick="abrirPesta(event, 'registrarse')" value="Sign in"></input>
+
+            </div>
+
+            <div id="logearse" class="tabcontent">
+
+                <form>
+                    <br>
+                    <br>
+
+                    <label for="Email">Email o numero: </label><br>
+
+                    <input type="text" id="email2" name="email2" pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$" title="Introduce un e-mail válido" required><br>
+                    <br>
+
+                    <label for="ContLog">Contraseña: </label><br>
+                    <input type="password" id="ContLog" name="ContLog" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Introduce una 
+                contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required>
+                    <img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra()">
+                    </input>
+
+                    <br>
+                    <br>
+
+                    <input type="submit" value="Enviar post resgistro" id="enviar2" onclick="conectarse(); return false">
+                    <input type="submit" value="Enviar sin registro" id="enviar3" onclick="conectar(); return false"><br>
+                    <br>
+                    <br>
+
+                    <br>
+                    <br>
+
+
+                </form>
+                <br>
+                <br>
+
+
+            </div>
+            <div id="registrarse" class="tabcontent">
+
+                <form>
+                    <br>
+
+                    <label for="Nombre">Nombre:* </label><br>
+
+                    <input type="text" name="Nombre" id="Nombre" pattern="[A-Za-z][ A-Za-z]{2,15}" title="Introduce solo caracteres alfabéticos" required><br>
+                    <br>
+
+                    <label for="Apellido">Apellido:* </label><br>
+                    <input type="text" name="Apellido" id="Apellido" pattern="[A-Za-z]{2,30}" title="Introduce entre 2 y 30 caracteres" required><br>
+                    <br>
+
+                    <label for="email">Email o numero:*</label><br>
+                    <input type="text" name="email" id="email" title="Introduce un email o un teléfono correcto" pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$" required><br>
+                    <br>
+
+                    <label for="Contraseña">Contraseña:* </label><br>
+                    <input type="password" id="contraseña" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Introduce una 
+                contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required><br>
+                    <br>
+
+                    <label for="Repetir">Repetir Contraseña:* </label><br>
+                    <input type="password" id="repetir" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Introduce una 
+                contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required><br>
+                    <br>
+
+                    <label for="Nacimiento">Fecha de nacimiento: </label><br>
+                    <input type="date" name="Nacimiento" id="Nacimiento"><br>
+                    <br>
+
+                    <input type="button" value="Enviar" id="enviar1">
+                    <br>
+                    <br>
+
+                    <br> * campos obligatorios
+                </form>
+                <br>
+                <br>
+                <br>
+
+
+            </div>
+            <div id="final">
+                <h1>Bienvenido a tu pagina, estamos creando cookies</h1>
+                <br>
+
+                <a href="index.html" id="paradesconectarse">Desconectarse</a>
+                <br>
+                <br>
+
+            </div>
+        </div>
+    </center>
+    <script src="js/app.js"></script>
 </body>
-<script src="codiguito.js"></script>
+
 </html>

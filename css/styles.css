@@ -1,54 +1,92 @@
-body{
-    background-color: rgb(217, 255, 253);
-    
-}
-div.sign{
-    position: absolute;
-    left: 37.5%;
-    
-}
-.log{
-    position: absolute;
-    left: 57.5%;
-    
+body {
+    background-color: rgb(78, 56, 76);
+    font-size: larger;
 }
 
-
-a :hover{
-    background-color: rgb(216, 211, 211);
-    font-size: large;
+#logearse {
+    display: none;
 }
 
-#logearse{
+#registrarse {
     display: none;
 }
-#registrarse{
+
+#final {
     display: none;
 }
-#final{
-    display: none;
-}
-#p{
-    background-color: red;
-    z-index: 15;
-}
-.fondito{
-    background-color: rgb(233, 225, 225);
-    width: 28vw;
+
+.fondito {
+    background-color: rgb(235, 223, 223);
+    width: 90vw;
     border: 1px solid black;
-    
 }
-.saludo{
-    background-color: rgb(235, 235, 235);
-    width: 28vw;
+
+.saludo {
+    background-color: rgb(235, 223, 223);
+    width: 45vw;
     border: 3px solid black;
 }
-label{
-    font-size: 2vw;
+
+
+/* Estilo de la pestaña */
+
+.tablinks {
+    overflow: hidden;
+    border: 1px solid rgb(165, 75, 75);
+    background-color: #e28c8c;
 }
-.obli{
-    font-size: 1.2vw;
+
+
+/* Estilo de los botones del contenido de las pestañas */
+
+.tab .tablinks {
+    background-color: inherit;
+    float: center;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
 }
-#d{
-    background-color: green;
+
+
+/* Change background color of inputs on hover */
+
+.tab input:hover {
+    background-color: #e28c8c;
+}
+
+.tab input:focus {
+    background-color: #e28c8c;
+}
+
+
+/* Create an active/current tablink class */
+
+.tab input.active {
+    background-color: #e28c8c;
+}
+
+
+/* Style the tab content */
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #e28c8c;
+    height: auto;
+    text-align: center;
+}
+
+.tabcontent input {
+    background-color: inherit;
+    border: 1px solid #e28c8c;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+.tabcontent input:focus {
+    background-color: antiquewhite;
+    border: 2px solid #b46f6f;
+    outline: brown;
 }
