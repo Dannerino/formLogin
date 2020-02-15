@@ -1,35 +1,10 @@
-function mostrarContra() {
-    var mostrar = document.getElementById("ContLog");
+function mostrarContra(etiqueta) {
+    var mostrar = document.getElementById(etiqueta);
 
     (mostrar.type == "password") ? mostrar.type = "text": mostrar.type = "password";
 
 }
 
-window.onload = leerCookie;
-
-function leeCookie() {
-    if (getCookie("sesion") == "" || getCookie("sesion") == null) {
-        document.getElementById("enviar2").addEventListener('click', validarLogin, false);
-        document.getElementById("enviar1").addEventListener('click', validarRegistro, false);
-        document.getElementById("fondito").style.display = "active";
-    }
-    if (validarLogin) {
-        document.getElementById("enviar2").addEventListener("submit", iniciarSesion);
-        var mensaje = recuperarCookie("nombre");
-        document.getElementById("final").innerHTML = mensaje;
-    } else {
-        document.getElementById("final").innerHTML = "No se ha podido conectar";
-    }
-    if (validarRegistro) {
-        alert("ha ido bien");
-        document.getElementById("enviar1").addEventListener("submit", crearUsuario);
-    } else {
-        document.getElementById("final").innerHTML = "No se ha podido registrar";
-    }
-
-
-
-}
 
 function abrirPesta(evt, pesta) {
     var i, tabcontent, tablinks;
@@ -50,6 +25,46 @@ function abrirPesta(evt, pesta) {
     document.getElementById(pesta).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+
+
+function error(elemento, mensaje, id) {
+    document.getElementsByClassName("error").innerHTML = mensaje;
+    elemento.focus();
+}
+
+function borrarError(id) {
+    document.getElementsByClassName("error").innerHTML = "";
+}
+
+
+
+function setCookie(nombre, valor, expiracion) {
+    var d = new Date();
+    d.setTime(d.getTime() + expiracion * 24 * 60 * 60 * 1000);
+    var expiracion = "expires = " + d.toUTCString();
+    document.cookie = nombre + "=" + valor + ";" + expiracion + "; path=/";
+}
+
+function getCookie(nombre) {
+    var nom = nombre + "=";
+    var array = document.cookie.split(";");
+    for (var i = 0; i < array.length; i++) {
+        var c = array[i];
+        while (c.charAt(0) == " ") {
+            c = c.substring(1);
+        }
+        if (c.indexOf(nombre) == 0) {
+            return c.substring(nom.length, c.length);
+        }
+    }
+    return "";
+}
+
+function deleteCookie(nombre) {
+    setCookie(nombre, "", 0);
+}
+
 
 function validaNombre() {
     var elemento = document.getElementById("Nombre");
@@ -112,7 +127,7 @@ function validaPassword() {
 }
 
 function validaPasswordConfirmar() {
-    var elemento = document.getElementById("repetir");
+    var elemento = document.getElementById("repetir").value;
     var elemento2 = document.getElementById("ContLog").value;
     borrarError("error-pass-confirma");
     if (elemento.value != elemento2) {
@@ -122,19 +137,6 @@ function validaPasswordConfirmar() {
     return true;
 }
 
-function validarRegistro(event) {
-    if (validaNombre()) {
-        alert("Te has registrado. Ahora puedes iniciar sesión.");
-        return true;
-    } else {
-        event.preventDefault();
-        return false;
-    }
-}
-
-
-
-/* VALIDACIÓN DE LOGIN */
 
 function validaMailTelefonoLogin() {
     var elemento = document.getElementById("email2");
@@ -166,73 +168,62 @@ function validaPasswordLogin() {
     return true;
 }
 
-function validarLogin(event) {
-    if (!event) event = window.event;
-    if (validaMailTelefonoLogin() && validaPasswordLogin()) {
+window.onload = leerCookie;
+
+function leerCookie() {
+    if (getCookie("sesion") == null) {
+        document.getElementById("enviar2").addEventListener('click', validarLogin, false);
+        document.getElementById("enviar1").addEventListener('click', validarRegistro, false);
+    } else {
+        document.getElementsByClassName("tab").innerHTML = "Hola, " + getCookie("sesion");
+        console.log("he leído la cookie");
+    }
+}
+
+
+
+
+function validarRegistro(event) {
+    if (validaNombre() && validaApellido() && validaMailTelefono && validaPassword && validaPasswordConfirmar()) {
+        crearUsuario();
         return true;
     } else {
+        error("user", "El usuario no se ha podido registrar.")
         event.preventDefault();
         return false;
     }
 }
 
-
-/* MARCAR ERRORES */
-
-function error(elemento, mensaje, id) {
-    document.getElementById(id).innerHTML = mensaje;
-    elemento.focus();
-}
-
-function borrarError(id) {
-    document.getElementById(id).innerHTML = "";
-}
-
-
-/* COOKIES */
-
-document.getElementById("paradesconectar").addEventListener("click", cerrarSesion);
-
 function crearUsuario() {
-    setCookie("email", document.getElementById("email").value, 1);
-    setCookie("pass", document.getElementById("contraseña").value, 1);
-    setCookie("name", document.getElementById("Nombre").value, 1);
+    var mail = document.getElementById("email").value;
+    var passswd = document.getElementById("repetir").value;
+    setCookie(mail, passswd, 1);
+    error("user", "El usuario se ha regisstrado correctamnte ya puedes iniciar sesión.")
 }
 
-function iniciarSesion() {
-    if (document.getElementById("email2").value == getCookie("email") && document.getElementById("ContLog").value == getCookie("pass")) {
-        setCookie("sesion", "sesion", 0.042);
+function iniciarSesion(mail, passwd) {
+
+    if (getCookie(mail).value == passwd) {
+        setCookie("sesion", mail, 0.042);
+
+        error("problemas", "He creado una puta cookie");
     } else {
-        alert("No existe ese usuario y contraseña");
+        error("problemas", "La contraseña no es conrrecta");
     }
 }
 
-function cerrarSesion() {
-    deleteCookie("sesion");
-}
 
-function setCookie(nombre, valor, expiracion) {
-    var d = new Date();
-    d.setTime(d.getTime() + expiracion * 24 * 60 * 60 * 1000);
-    var expiracion = "expires = " + d.toUTCString();
-    document.cookie = nombre + "=" + valor + ";" + expiracion + "; path=/";
-}
+function validarLogin(event) {
+    if (!event) event = window.event;
+    if (validaMailTelefonoLogin() && validaPasswordLogin()) {
+        var mail = document.getElementById("email2").value;
+        var passswd = document.getElementById("ContLog").value;
+        iniciarSesion(mail, passswd);
+        return true;
+    } else {
 
-function getCookie(nombre) {
-    var nom = nombre + "=";
-    var array = document.cookie.split(";");
-    for (var i = 0; i < array.length; i++) {
-        var c = array[i];
-        while (c.charAt(0) == " ") {
-            c = c.substring(1);
-        }
-        if (c.indexOf(nombre) == 0) {
-            return c.substring(nom.length, c.length);
-        }
+        error("user", "No se ha podido registrar el usuario");
+        event.preventDefault();
+        return false;
     }
-    return "";
-}
-
-function deleteCookie(nombre) {
-    setCookie(nombre, "", 0);
 }
