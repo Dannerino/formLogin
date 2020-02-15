@@ -28,17 +28,17 @@
 
             <div id="logearse" class="tabcontent">
 
-                <div class="error"></div>
+                <div id="error"></div>
                 <form>
                     <br>
                     <br>
 
-                    <label for="Email">Email o numero: </label><br>
+                    <label for="Email" id="error-email-login" class="error">Email o numero: </label><br>
 
                     <input type="text" id="email2" name="email2" pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$" title="Introduce un e-mail válido" required><br>
                     <br>
 
-                    <label for="ContLog">Contraseña: </label><br>
+                    <label for="ContLog" id="error-pass-login" class="error">Contraseña: </label><br>
                     <input type="password" id="ContLog" name="ContLog" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Introduce una 
                 contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required>
                     <img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('ContLog')">
@@ -63,29 +63,29 @@
             </div>
             <div id="registrarse" class="tabcontent">
 
-                <div class="error"></div>
+                <div id="error2"></div>
                 <form>
                     <br>
 
-                    <label for="Nombre">Nombre:* </label><br>
+                    <label for="Nombre" id="error-nombre" class="error">Nombre:* </label><br>
 
                     <input type="text" name="Nombre" id="Nombre" pattern="[A-Za-z][ A-Za-z]{2,15}" title="Introduce solo caracteres alfabéticos" required><br>
                     <br>
 
-                    <label for="Apellido">Apellido:* </label><br>
+                    <label for="Apellido" id="error-apellido" class="error">Apellido:* </label><br>
                     <input type="text" name="Apellido" id="Apellido" pattern="[A-Za-z]{2,30}" title="Introduce entre 2 y 30 caracteres" required><br>
                     <br>
 
-                    <label for="email">Email o numero:*</label><br>
+                    <label for="email" id="error-email" class="error">Email o numero:*</label><br>
                     <input type="text" name="email" id="email" title="Introduce un email o un teléfono correcto" pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$" required><br>
                     <br>
 
-                    <label for="Contraseña">Contraseña:* </label><br>
+                    <label for="Contraseña" id="error-pass" class="error">Contraseña:* </label><br>
                     <input type="password" id="contraseña" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Introduce una 
                 contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('contraseña')"><br>
                     <br>
 
-                    <label for="Repetir">Repetir Contraseña:* </label><br>
+                    <label for="Repetir" id="error-pass-confirma" class="error">Repetir Contraseña:* </label><br>
                     <input type="password" id="repetir" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Introduce una 
                 contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('repetir')"></input><br>
                     <br>

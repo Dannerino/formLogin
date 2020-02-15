@@ -29,7 +29,7 @@ function abrirPesta(evt, pesta) {
 
 
 function error(elemento, mensaje, id) {
-    document.getElementsByClassName("error").innerHTML = mensaje;
+    document.getElementsByTagName("error").innerHTML = mensaje;
     elemento.focus();
 }
 
@@ -128,7 +128,7 @@ function validaPassword() {
 
 function validaPasswordConfirmar() {
     var elemento = document.getElementById("repetir").value;
-    var elemento2 = document.getElementById("ContLog").value;
+    var elemento2 = document.getElementById("contraseña").value;
     borrarError("error-pass-confirma");
     if (elemento.value != elemento2) {
         error(elemento, "La contraseña debe coincidir", "error-pass-confirma")
@@ -171,24 +171,25 @@ function validaPasswordLogin() {
 window.onload = leerCookie;
 
 function leerCookie() {
-    if (getCookie("sesion") == null) {
+    if (getCookie("sesion") == "") {
         document.getElementById("enviar2").addEventListener('click', validarLogin, false);
         document.getElementById("enviar1").addEventListener('click', validarRegistro, false);
     } else {
-        document.getElementsByClassName("tab").innerHTML = "Hola, " + getCookie("sesion");
+        document.getElementById("tab").innerHTML = "Hola, " + getCookie("sesion");
         console.log("he leído la cookie");
     }
 }
 
-
+document.getElementById("enviar2").addEventListener('click', validarLogin, false);
+document.getElementById("enviar1").addEventListener('click', validarRegistro, false);
 
 
 function validarRegistro(event) {
-    if (validaNombre() && validaApellido() && validaMailTelefono && validaPassword && validaPasswordConfirmar()) {
-        crearUsuario();
+    if (validaNombre() && validaApellido() && validaMailTelefono() && validaPassword() && validaPasswordConfirmar()) {
+        //crearUsuario();
         return true;
     } else {
-        error("user", "El usuario no se ha podido registrar.")
+        document.getElementById("error2").innerHTML = "El usuario no se ha podido registrar.";
         event.preventDefault();
         return false;
     }
@@ -197,18 +198,19 @@ function validarRegistro(event) {
 function crearUsuario() {
     var mail = document.getElementById("email").value;
     var passswd = document.getElementById("repetir").value;
+    console.log(mail + " VARIABLEEE " + passwd)
     setCookie(mail, passswd, 1);
-    error("user", "El usuario se ha regisstrado correctamnte ya puedes iniciar sesión.")
+    document.getElementById("error").innerHTML = "El usuario se ha regisstrado correctamnte ya puedes iniciar sesión.";
 }
 
 function iniciarSesion(mail, passwd) {
 
-    if (getCookie(mail).value == passwd) {
+    if (getCookie(mail) == passwd) {
         setCookie("sesion", mail, 0.042);
-
-        error("problemas", "He creado una puta cookie");
+        document.getElementById("error").innerHTML = "He creado una puta cookie";
     } else {
-        error("problemas", "La contraseña no es conrrecta");
+        getCookie(mail).value
+        document.getElementById("error").innerHTML = "La contraseña no es conrrecta";
     }
 }
 
@@ -221,8 +223,7 @@ function validarLogin(event) {
         iniciarSesion(mail, passswd);
         return true;
     } else {
-
-        error("user", "No se ha podido registrar el usuario");
+        document.getElementById("error").innerHTML = "No se ha podido registrar el usuario";
         event.preventDefault();
         return false;
     }
