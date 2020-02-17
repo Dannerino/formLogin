@@ -46,7 +46,7 @@
                     <br>
                     <br>
 
-                    <input type="submit" value="Acceder" id="enviar2">
+                    <input type="button" value="Acceder" id="enviar2">
                     <br>
                     <br>
 
@@ -80,11 +80,11 @@
                     <br>
 
                     <label for="Contraseña" id="error-pass" class="error">Contraseña:* </label><br>
-                    <input type="password" id="contraseña"pattern="^[a-z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números"  required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('contraseña')"><br>
+                    <input type="password" id="contraseña" pattern="^[a-zA-Z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números" required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('contraseña')"><br>
                     <br>
 
                     <label for="Repetir" id="error-pass-confirma" class="error">Repetir Contraseña:* </label><br>
-                    <input type="password" id="repetir"pattern="^[a-z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números"  required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('repetir')"></input><br>
+                    <input type="password" id="repetir" pattern="^[a-zA-Z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números" required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('repetir')"></input><br>
                     <br>
 
                     <label for="Nacimiento">Fecha de nacimiento: </label><br>
@@ -105,7 +105,7 @@
             </div>
         </div>
         <div id="final">
-
+            <p id="final2"></p>
             <a href="index.html" id="paradesconectarse">Desconectarse</a>
             <br>
             <br>

@@ -84,9 +84,3 @@ body {
     padding: 14px 16px;
     transition: 0.3s;
 }
-
-.tabcontent input:focus {
-    background-color: antiquewhite;
-    border: 2px solid #b46f6f;
-    outline: brown;
-}
