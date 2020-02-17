@@ -30,7 +30,6 @@ function abrirPesta(evt, pesta) {
 
 function error(elemento, mensaje, id) {
     document.getElementsByTagName("error").innerHTML = mensaje;
-    elemento.focus();
 }
 
 function borrarError(id) {
@@ -130,7 +129,7 @@ function validaPasswordConfirmar() {
     var elemento = document.getElementById("repetir").value;
     var elemento2 = document.getElementById("contraseña").value;
     borrarError("error-pass-confirma");
-    if (elemento.value != elemento2) {
+    if (elemento != elemento2) {
         error(elemento, "La contraseña debe coincidir", "error-pass-confirma")
         return false;
     }
@@ -185,9 +184,12 @@ document.getElementById("enviar1").addEventListener('click', validarRegistro, fa
 
 
 function validarRegistro(event) {
-    if (validaNombre() && validaApellido() && validaMailTelefono() && validaPassword() && validaPasswordConfirmar()) {
-        //crearUsuario();
-        return true;
+    if (validaNombre() && validaApellido() && validaMailTelefono()) {
+        if (validaPassword() && validaPasswordConfirmar()) {
+            crearUsuario();
+            console.log("whaaat");
+            return true;
+        } else { console.log("errore"); }
     } else {
         document.getElementById("error2").innerHTML = "El usuario no se ha podido registrar.";
         event.preventDefault();
@@ -198,20 +200,16 @@ function validarRegistro(event) {
 function crearUsuario() {
     var mail = document.getElementById("email").value;
     var passswd = document.getElementById("repetir").value;
-    console.log(mail + " VARIABLEEE " + passwd)
+    console.log(mail + " VARIABLEEE " + passswd)
     setCookie(mail, passswd, 1);
     document.getElementById("error").innerHTML = "El usuario se ha regisstrado correctamnte ya puedes iniciar sesión.";
 }
 
-function iniciarSesion(mail, passwd) {
+function iniciarSesion(mail) {
 
-    if (getCookie(mail) == passwd) {
-        setCookie("sesion", mail, 0.042);
-        document.getElementById("error").innerHTML = "He creado una puta cookie";
-    } else {
-        getCookie(mail).value
-        document.getElementById("error").innerHTML = "La contraseña no es conrrecta";
-    }
+    setCookie("sesion", mail, 0.042);
+    document.getElementById("error").innerHTML = "He creado una puta cookie";
+
 }
 
 
@@ -220,7 +218,12 @@ function validarLogin(event) {
     if (validaMailTelefonoLogin() && validaPasswordLogin()) {
         var mail = document.getElementById("email2").value;
         var passswd = document.getElementById("ContLog").value;
-        iniciarSesion(mail, passswd);
+        if (getCookie(mail) == passwd) {
+            iniciarSesion(mail);
+        } else {
+
+            document.getElementById("error").innerHTML = "La contraseña no es conrrecta";
+        }
         return true;
     } else {
         document.getElementById("error").innerHTML = "No se ha podido registrar el usuario";

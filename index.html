@@ -39,8 +39,7 @@
                     <br>
 
                     <label for="ContLog" id="error-pass-login" class="error">Contraseña: </label><br>
-                    <input type="password" id="ContLog" name="ContLog" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Introduce una 
-                contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required>
+                    <input type="password" id="ContLog" name="ContLog" pattern="^[a-z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números" required>
                     <img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('ContLog')">
                     </input>
 
@@ -81,13 +80,11 @@
                     <br>
 
                     <label for="Contraseña" id="error-pass" class="error">Contraseña:* </label><br>
-                    <input type="password" id="contraseña" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Introduce una 
-                contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('contraseña')"><br>
+                    <input type="password" id="contraseña"pattern="^[a-z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números"  required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('contraseña')"><br>
                     <br>
 
                     <label for="Repetir" id="error-pass-confirma" class="error">Repetir Contraseña:* </label><br>
-                    <input type="password" id="repetir" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Introduce una 
-                contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)" required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('repetir')"></input><br>
+                    <input type="password" id="repetir"pattern="^[a-z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números"  required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('repetir')"></input><br>
                     <br>
 
                     <label for="Nacimiento">Fecha de nacimiento: </label><br>
