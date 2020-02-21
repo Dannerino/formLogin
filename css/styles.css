@@ -14,6 +14,18 @@ body {
 #final {
     display: none;
 }
+.errore{
+    color:rgb(121, 11, 53);
+    margin-bottom: 3vw;
+}
+#error{
+    color: red;
+    padding-top: 2vw;
+}
+#error2{
+    color: red;
+    padding-top: 2vw;
+}
 
 .fondito {
     background-color: rgb(235, 223, 223);

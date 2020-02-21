@@ -54,12 +54,10 @@ function getCookie(nombre) {
 
 function deleteCookie(nombre) {
     setCookie(nombre, "", 0);
+    window.location.reload();
 }
 
 
-function error(elemento, mensaje, id) {
-    alert("erroreee: " + mensaje);
-}
 
 
 
@@ -67,12 +65,14 @@ function validaNombre() {
     var elemento = document.getElementById("Nombre");
     if (!elemento.checkValidity()) {
         if (elemento.validity.valueMissing) {
-            error(elemento, "Debe introducir un nombre", "error-nombre");
+            document.getElementById("error-nombre").textContent="Debe introducir un nombre";
         }
         if (elemento.validity.patternMismatch) {
-            error(elemento, "Introduce un nombre de entre 2 y 15 letras", "error-nombre");
+            document.getElementById("error-nombre").textContent="Introduce un nombre de entre 2 y 15 letras";
         }
         return false;
+    } else {
+        document.getElementById("error-nombre").textContent="";
     }
     return true;
 }
@@ -81,12 +81,14 @@ function validaApellido() {
     var elemento = document.getElementById("Apellido");
     if (!elemento.checkValidity()) {
         if (elemento.validity.valueMissing) {
-            error(elemento, "Debe introducir un apellido", "error-apellido");
+            document.getElementById("error-apellido").textContent="Debe introducir un apellido";
         }
         if (elemento.validity.patternMismatch) {
-            error(elemento, "Introduce un apellido entre 2 y 30 letras", "error-apellido");
+            document.getElementById("error-apellido").textContent="Introduce un apellido entre 2 y 30 letras";
         }
         return false;
+    }else {
+        document.getElementById("error-apellido").textContent="";
     }
     return true;
 }
@@ -95,12 +97,14 @@ function validaMailTelefono() {
     var elemento = document.getElementById("email");
     if (!elemento.checkValidity()) {
         if (elemento.validity.valueMissing) {
-            error(elemento, "Debe introducir un teléfono o un email", "error-email");
+            document.getElementById("error-email").textContent="Debe introducir un teléfono o un email";
         }
         if (elemento.validity.patternMismatch) {
-            error(elemento, "Introduce un email o un teléfono correcto", "error-email");
+            document.getElementById("error-email").textContent="Introduce un email o un teléfono correcto";
         }
         return false;
+    }else {
+        document.getElementById("error-email").textContent="";
     }
     return true;
 }
@@ -109,12 +113,14 @@ function validaPassword() {
     var elemento = document.getElementById("contraseña");
     if (!elemento.checkValidity()) {
         if (elemento.validity.valueMissing) {
-            error(elemento, "Debe introducir una contraseña", "error-pass");
+            document.getElementById("error-pass").textContent="Debe introducir una contraseña";
         }
         if (elemento.validity.patternMismatch) {
-            error(elemento, "Introduce una contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)", "error-pass");
+            document.getElementById("error-pass").textContent="Debe introducir una contraseña que contenga letras y números";
         }
         return false;
+    }else {
+        document.getElementById("error-pass").textContent="";
     }
     return true;
 }
@@ -123,8 +129,10 @@ function validaPasswordConfirmar() {
     var elemento = document.getElementById("repetir").value;
     var elemento2 = document.getElementById("contraseña").value;
     if (elemento != elemento2) {
-        error(elemento, "La contraseña debe coincidir", "error-pass-confirma")
+        document.getElementById("error-repetir").textContent="La contraseña debe coincidir";
         return false;
+    }else {
+        document.getElementById("error-repetir").textContent="";
     }
     return true;
 }
@@ -134,12 +142,14 @@ function validaMailTelefonoLogin() {
     var elemento = document.getElementById("email2");
     if (!elemento.checkValidity()) {
         if (elemento.validity.valueMissing) {
-            error(elemento, "Debe introducir un teléfono o un email", "error-email-login");
+            document.getElementById("error-email-login").textContent="Debe introducir un teléfono o un email";
         }
         if (elemento.validity.patternMismatch) {
-            error(elemento, "Introduce un email o un teléfono correcto", "error-email-login");
+            document.getElementById("error-email-login").textContent="Debe introducir un teléfono o un email correcto";
         }
         return false;
+    }else {
+        document.getElementById("error-email-login").textContent="";
     }
     return true;
 }
@@ -148,12 +158,14 @@ function validaPasswordLogin() {
     var elemento = document.getElementById("ContLog");
     if (!elemento.checkValidity()) {
         if (elemento.validity.valueMissing) {
-            error(elemento, "Debe introducir una contraseña", "error-pass-login");
+            document.getElementById("error-pass-login").textContent="Debe introducir una contraseña";
         }
         if (elemento.validity.patternMismatch) {
-            error(elemento, "Introduce una contraseña de mínimo 8 caracteres. Debe contener una minúscula, una mayúscula, un número y un carácter especial (@$!%*?&)", "error-pass-login");
+            document.getElementById("error-pass-login").textContent="Debe introducir una contraseña con letras y números";
         }
         return false;
+    }else {
+        document.getElementById("error-pass-login").textContent="";
     }
     return true;
 }
@@ -164,9 +176,14 @@ function leerCookie() {
     if (getCookie("sesion") == "") {
         document.getElementById("enviar2").addEventListener('click', validarLogin, false);
         document.getElementById("enviar1").addEventListener('click', validarRegistro, false);
+        document.getElementById("buttrror").style.display="none";
     } else {
-        document.getElementById("final2").innerHTML = "Hola, " + getCookie("sesion");
-        console.log("he leído la cookie");
+        document.getElementById("error").innerHTML += "Hola, " + getCookie("sesion");
+        document.getElementById("buttrror").style.display="active";
+        tabcontent = document.getElementsByClassName("loggito");
+         for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
     }
 }
 
@@ -178,9 +195,8 @@ function validarRegistro(event) {
     if (validaNombre() && validaApellido() && validaMailTelefono()) {
         if (validaPassword() && validaPasswordConfirmar()) {
             crearUsuario();
-            console.log("whaaat");
             return true;
-        } else { console.log("errore"); }
+        } 
     } else {
         document.getElementById("error2").innerHTML = "El usuario no se ha podido registrar.";
         event.preventDefault();
@@ -198,8 +214,11 @@ function crearUsuario() {
 function iniciarSesion(mail) {
 
     setCookie("sesion", mail, 0.042);
-    document.getElementById("error").innerHTML = "He creado una puta cookie";
+    document.getElementById("error").innerHTML += "He creado una puta cookie";
+    document.getElementById("error").setAttribute("class", "errore");
+    document.getElementById("buttrror").style.display="active";
 
+    window.location.reload(true);
 }
 
 
@@ -211,7 +230,7 @@ function validarLogin(event) {
         if (getCookie(mail) == passwd) {
             iniciarSesion(mail);
         } else {
-            document.getElementById("error").innerHTML = "La contraseña no es conrrecta";
+            document.getElementById("error-pass-login").innerHTML = "La contraseña no es conrrecta";
         }
 
         if (!getCookie(mail)) {

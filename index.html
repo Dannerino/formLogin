@@ -21,26 +21,32 @@
 
             <div id="inicial" class="tab">
 
-                <input type="button" class="Login tablinks" id="logear" onclick="abrirPesta(event, 'logearse')" value="Log In"></input>
-                <input type="button" class="signin tablinks" id="alta" onclick="abrirPesta(event, 'registrarse')" value="Sign in"></input>
+                <input type="button" class="Login tablinks" id="logear" onclick="abrirPesta(event, 'logearse')"
+                    value="Log In"></input>
+                <input type="button" class="signin tablinks" id="alta" onclick="abrirPesta(event, 'registrarse')"
+                    value="Sign in"></input>
 
             </div>
 
             <div id="logearse" class="tabcontent">
 
-                <div id="error"></div>
-                <form>
+                <div id="error"></div><button id="buttrror" value="Desconectar" onclick="deleteCookie('sesion')">Desconectar</button> 
+                <form class="loggito">
                     <br>
                     <br>
 
-                    <label for="Email" id="error-email-login" class="error">Email o numero: </label><br>
+                    <label for="Email" class="error">Email o numero: </label><br>
+                    <input type="text" onfocusout="validaMailTelefonoLogin()" id="email2" name="email2"
+                        pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$"
+                        title="Introduce un e-mail válido" required><br>
+                    <span class="errore" id="error-email-login"></span>
+                    <br><br> 
 
-                    <input type="text" id="email2" name="email2" pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$" title="Introduce un e-mail válido" required><br>
-                    <br>
-
-                    <label for="ContLog" id="error-pass-login" class="error">Contraseña: </label><br>
-                    <input type="password" id="ContLog" name="ContLog" pattern="^[a-z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números" required>
-                    <img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('ContLog')">
+                    <label for="ContLog" class="error">Contraseña: </label><br>
+                    <input type="password" id="ContLog" onfocusout="validaPasswordLogin()" name="ContLog" pattern="^[a-zA-Z0-9]{5,12}$"
+                        title="Introduce una contraseña de entre 5 a 12 caracteres y números" required>
+                    <img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('ContLog')"><br>
+                    <span class="errore" id="error-pass-login"></span><br> 
                     </input>
 
                     <br>
@@ -66,26 +72,37 @@
                 <form>
                     <br>
 
-                    <label for="Nombre" id="error-nombre" class="error">Nombre:* </label><br>
+                    <label for="Nombre" class="error">Nombre:* </label><br>
+                    <input type="text" name="Nombre" id="Nombre" onfocusout="validaNombre()" pattern="[A-Za-z][ A-Za-z]{2,15}"
+                        title="Introduce solo caracteres alfabéticos" required><br>
+                   <span class="errore" id="error-nombre"></span>
+                    <br> <br> 
 
-                    <input type="text" name="Nombre" id="Nombre" pattern="[A-Za-z][ A-Za-z]{2,15}" title="Introduce solo caracteres alfabéticos" required><br>
-                    <br>
+                    <label for="Apellido" class="error">Apellido:* </label><br>
+                    <input type="text" name="Apellido" onfocusout="validaApellido()" id="Apellido" pattern="[A-Za-z]{2,30}"
+                        title="Introduce entre 2 y 30 caracteres" required><br>
+                    <span class="errore" id="error-apellido"></span>
+                    <br> <br>
 
-                    <label for="Apellido" id="error-apellido" class="error">Apellido:* </label><br>
-                    <input type="text" name="Apellido" id="Apellido" pattern="[A-Za-z]{2,30}" title="Introduce entre 2 y 30 caracteres" required><br>
-                    <br>
+                    <label for="email" class="error">Email o numero:*</label><br>
+                    <input type="text" name="email" id="email" onfocusout="validaMailTelefono()" title="Introduce un email o un teléfono correcto"
+                        pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$" required><br>
+                     <span class="errore" id="error-email"></span>
+                    <br><br>
 
-                    <label for="email" id="error-email" class="error">Email o numero:*</label><br>
-                    <input type="text" name="email" id="email" title="Introduce un email o un teléfono correcto" pattern="^([0-9]{9})|([A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3})$" required><br>
-                    <br>
+                    <label for="Contraseña" class="error">Contraseña:* </label><br>
+                    <input type="password" id="contraseña" onfocusout="validaPassword()" pattern="^[a-zA-Z0-9]{5,12}$"
+                        title="Introduce una contraseña de entre 5 a 12 caracteres y números" required><img
+                        src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('contraseña')"><br>
+                    <span class="errore" id="error-pass"></span>
+                    <br> <br>
 
-                    <label for="Contraseña" id="error-pass" class="error">Contraseña:* </label><br>
-                    <input type="password" id="contraseña" pattern="^[a-zA-Z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números" required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('contraseña')"><br>
-                    <br>
-
-                    <label for="Repetir" id="error-pass-confirma" class="error">Repetir Contraseña:* </label><br>
-                    <input type="password" id="repetir" pattern="^[a-zA-Z0-9]{5,12}$" title="Introduce una contraseña de entre 5 a 12 caracteres y números" required><img src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('repetir')"></input><br>
-                    <br>
+                    <label for="Repetir" id="error-pass-repetir" class="error">Repetir Contraseña:* </label><br>
+                    <input type="password" id="repetir" onfocusout="validaPasswordConfirmar()" pattern="^[a-zA-Z0-9]{5,12}$"
+                        title="Introduce una contraseña de entre 5 a 12 caracteres y números" required><img
+                        src="imgs/ojitosPasswd.png" id="mostrar" onclick="mostrarContra('repetir')"></input><br>
+                    <span class="errore" id="error-pass-repetir"></span>
+                    <br> <br>
 
                     <label for="Nacimiento">Fecha de nacimiento: </label><br>
                     <input type="date" name="Nacimiento" id="Nacimiento"><br>
@@ -104,13 +121,7 @@
 
             </div>
         </div>
-        <div id="final">
-            <p id="final2"></p>
-            <a href="index.html" id="paradesconectarse">Desconectarse</a>
-            <br>
-            <br>
 
-        </div>
         </div>
     </center>
     <script src="js/apps.js"></script>
