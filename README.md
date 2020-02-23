@@ -1,7 +1,7 @@
 <b>Formulario de validación</b>
 El formulario consta de dos pestañas, abierta por defecto la del log in. 
 
-!(https://raw.githubusercontent.com/Dannerino/formLogin/master/imgs/inicio.png)
+<img src="https://raw.githubusercontent.com/Dannerino/formLogin/master/imgs/inicio.png">
 
 Existe una doble validación:
 1) Todos los campos tienen una validación rápida mediante el evento onfocusout.
