@@ -10,7 +10,7 @@ Existe una doble validación:
 
 2) al presionar ambos submit se lleva a los eventos validarLogin y validarRegistro para doble seguridad.
 
-<img src="https://raw.githubusercontent.com/Dannerino/formLogin/master/imgs/dobleValidacion.png">
+<img src="https://raw.githubusercontent.com/Dannerino/formLogin/master/imgs/dobleValidacion.PNG">
 
 
 <b>Cookies almacenadas</b>
