@@ -22,3 +22,6 @@ Se crean dos cookies:
 <img src="https://raw.githubusercontent.com/Dannerino/formLogin/master/imgs/cookies.png">
 
 <img src="https://raw.githubusercontent.com/Dannerino/formLogin/master/imgs/conexion.png">
+
+
+Los tests fueron realizados con Selenium IDEy por lo tanto hay que ejecutar el archivo en el plugin de Selenium.
