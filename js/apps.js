@@ -6,7 +6,7 @@ function mostrarContra(etiqueta) {
 }
 
 
-function abrirPesta(evt, pesta) {
+function abrirPesta(pesta) {
     var i, tabcontent, tablinks;
 
     // Esconder elementos .tabcontent
@@ -23,7 +23,6 @@ function abrirPesta(evt, pesta) {
 
     // Show the current tab, and add an "active" class to the button that opened the tab
     document.getElementById(pesta).style.display = "block";
-    evt.currentTarget.className += " active";
 }
 
 
@@ -178,7 +177,7 @@ function leerCookie() {
         document.getElementById("enviar1").addEventListener('click', validarRegistro, false);
         document.getElementById("buttrror").style.display = "none";
     } else {
-        document.getElementById("error").innerHTML += "Hola, " + getCookie("sesion");
+        document.getElementById("error").innerHTML = "Hola, " + getCookie("sesion");
         document.getElementById("buttrror").style.display = "active";
         tabcontent = document.getElementsByClassName("loggito");
         for (i = 0; i < tabcontent.length; i++) {
@@ -190,11 +189,13 @@ function leerCookie() {
 document.getElementById("enviar2").addEventListener('click', validarLogin, false);
 document.getElementById("enviar1").addEventListener('click', validarRegistro, false);
 
+window.onload(document.getElementById("logear").click());
 
 function validarRegistro(event) {
     if (validaNombre() && validaApellido() && validaMailTelefono()) {
         if (validaPassword() && validaPasswordConfirmar()) {
             crearUsuario();
+            document.getElementById("Nombre").focus();
             return true;
         }
     } else {
@@ -208,19 +209,15 @@ function crearUsuario() {
     var mail = document.getElementById("email").value;
     var passswd = document.getElementById("repetir").value;
     setCookie(mail, passswd, 1);
-    document.getElementById("error2").innerHTML = "El usuario se ha regisstrado correctamnte ya puedes iniciar sesión.";
+    document.getElementById("error2").innerHTML = "El usuario se ha registrado correctamnte ya puedes iniciar sesión.";
 }
 
 function iniciarSesion(mail) {
 
     setCookie("sesion", mail, 0.042);
-    document.getElementById("error").innerHTML += "He creado una puta cookie";
     document.getElementById("error").setAttribute("class", "errore");
-    document.getElementById("buttrror").style.display = "active";
-
-    window.location.reload(true);
+    window.location.reload();
 }
-
 
 function validarLogin(event) {
     if (!event) event = window.event;
@@ -230,7 +227,7 @@ function validarLogin(event) {
         if (getCookie(mail) == passwd) {
             iniciarSesion(mail);
         } else {
-            document.getElementById("error-pass-login").innerHTML = "La contraseña no es conrrecta";
+            document.getElementById("error-pass-login").innerHTML = "La contraseña no es correcta";
         }
 
         if (!getCookie(mail)) {

@@ -14,22 +14,25 @@ body {
 #final {
     display: none;
 }
-.errore{
-    color:rgb(121, 11, 53);
-    margin-bottom: 3vw;
+
+.errore {
+    color: rgb(121, 11, 53);
+    margin-bottom: 1vw;
 }
-#error{
+
+#error {
     color: red;
-    padding-top: 2vw;
+    padding-top: 1vw;
 }
-#error2{
+
+#error2 {
     color: red;
-    padding-top: 2vw;
+    padding-top: 1vw;
 }
 
 .fondito {
     background-color: rgb(235, 223, 223);
-    width: 90vw;
+    width: 70vw;
     border: 1px solid black;
 }
 
@@ -84,7 +87,7 @@ body {
 
 .tabcontent {
     display: none;
-    padding: 6px 12px;
+    padding: 6px;
     border: 1px solid #e28c8c;
     height: auto;
     text-align: center;
@@ -93,6 +96,6 @@ body {
 .tabcontent input {
     background-color: inherit;
     border: 1px solid #e28c8c;
-    padding: 14px 16px;
+    padding: 14px;
     transition: 0.3s;
 }
